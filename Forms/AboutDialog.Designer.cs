@@ -1,7 +1,7 @@
 ﻿
-namespace XeniaUpdater_C
+namespace XeniaUpdater
 {
-    partial class Form2
+    partial class AboutDialog
     {
         /// <summary>
         /// Required designer variable.
