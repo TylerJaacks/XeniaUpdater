@@ -5,3 +5,4 @@ version-Debug.txt
 version-Release.txt
 XeniaUpdater.csproj.user
 .vs/*
+Properties/*
