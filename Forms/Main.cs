@@ -58,15 +58,14 @@ namespace XeniaUpdater.Forms
                     progressBar.Value = e.ProgressPercentage;
                     percentageLabel.Text = $@"{progressBar.Value}%";
 
-                    if (progressBar.Value == 100)
-                    {
-                        ToggleButtons(true);
+                    if (progressBar.Value != 100) return;
 
-                        Util.ExtractBuild(extractLocation, downloadLocation);
-                    }
+                    ToggleButtons(true);
+
+                    Util.ExtractBuild(extractLocation, downloadLocation);
                 }
-                webClient.Dispose();
 
+                webClient.Dispose();
             }
         }
 
