@@ -6,3 +6,5 @@ version-Release.txt
 XeniaUpdater.csproj.user
 .vs/*
 Properties/*
+/XeniaUpdater.csproj.DotSettings.user
+/XeniaUpdater.sln.DotSettings.user
