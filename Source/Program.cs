@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 using XeniaUpdater.Forms;
+using XeniaUpdater.Source;
 
 namespace XeniaUpdater
 {
-    internal static class Program
+    public static class Program
     {
+        public static Settings Settings = new Settings();
+
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

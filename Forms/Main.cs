@@ -13,15 +13,12 @@ namespace XeniaUpdater.Forms
         private string _canaryZipPath;
         private string _canaryExZipPath;
 
-        private readonly Settings _settings;
 
         public Main()
         {
             InitializeComponent();
 
-            _settings = new Settings();
-
-            Util.StartupTasks(_settings);
+            Util.StartupTasks();
         }
 
         private void UpdateXenia(string folderName, string url, string zipFullName, string exeName)
@@ -47,8 +44,6 @@ namespace XeniaUpdater.Forms
 
             using (var webClient = new WebClient())
             {
-                // TODO: Probably put this in %TEMP% and delete it after download.
-
                 webClient.DownloadFileAsync(new Uri(downloadUrl), downloadLocation);
 
                 webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(WcDownloadProgressChanged);
@@ -63,6 +58,9 @@ namespace XeniaUpdater.Forms
                     ToggleButtons(true);
 
                     Util.ExtractBuild(extractLocation, downloadLocation);
+
+                    progressBar.Value = 0;
+                    percentageLabel.Text = $@"{progressBar.Value}%";
                 }
 
                 webClient.Dispose();
@@ -82,7 +80,7 @@ namespace XeniaUpdater.Forms
 
             _masterZipPath = Path.Combine(Path.GetTempPath() + "xenia_master.zip");
 
-            UpdateXenia(_settings.MasterPath, url, _masterZipPath, "xenia.exe");
+            UpdateXenia(Program.Settings.MasterPath, url, _masterZipPath, "xenia.exe");
         }
 
         private void updateCanaryButton_Click(object sender, EventArgs e)
@@ -91,7 +89,7 @@ namespace XeniaUpdater.Forms
 
             _canaryZipPath = Path.Combine(Path.GetTempPath() + "xenia_canary.zip");
 
-            UpdateXenia(_settings.CanaryPath, url, _canaryZipPath, "xenia_canary.exe");
+            UpdateXenia(Program.Settings.CanaryPath, url, _canaryZipPath, "xenia_canary.exe");
         }
 
         private void updateEx_Click(object sender, EventArgs e)
@@ -100,7 +98,7 @@ namespace XeniaUpdater.Forms
 
             _canaryExZipPath = Path.Combine(Path.GetTempPath() + "xenia_canary.zip");
 
-            UpdateXenia(_settings.CanaryExPath, url, _canaryExZipPath, "xenia_canary.exe");
+            UpdateXenia(Program.Settings.CanaryExPath, url, _canaryExZipPath, "xenia_canary.exe");
         }
 
         private void infoButton_Click(object sender, EventArgs e)

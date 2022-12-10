@@ -24,8 +24,11 @@ namespace XeniaUpdater.Source
             try
             {
                 File.Delete($"{folderName}/LICENSE");
+                File.Delete($"{folderName}/xenia.exe");
+                File.Delete($"{folderName}/xenia_canary.exe");
+                File.Delete($"{folderName}/xenia.pdb");
 
-                ZipFile.ExtractToDirectory($"{folderName}/{zipName}", folderName);
+                ZipFile.ExtractToDirectory($"{zipName}", folderName);
 
                 File.Delete($"{folderName}/LICENSE");
 
@@ -56,12 +59,9 @@ namespace XeniaUpdater.Source
             }
         }
 
-        public static void StartupTasks(Settings settings)
+        public static void StartupTasks()
         {
-            // TODO: Load from Settings File!
-            settings.MasterPath = "D:\\Desktop\\Xenia\\master\\";
-            settings.CanaryPath = "D:\\Desktop\\Xenia\\canary\\";
-            settings.CanaryExPath = "D:\\Desktop\\Xenia\\canary_ex\\";
+            Program.Settings.LoadSettings();
         }
 
         public static bool InternetAvailable()
